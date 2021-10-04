@@ -889,6 +889,12 @@ return [
                     'type' => 'string',
                     'required' => false,
                 ],
+                'status' => [
+                    'location' => 'json',
+                    'type' => 'string',
+                    'required' => false,
+                    'enum' => ['active', 'disabled']
+                ],
                 'tax_number' => [
                     'location' => 'json',
                     'type' => 'string',
@@ -989,6 +995,12 @@ return [
                     'location' => 'json',
                     'type' => 'string',
                     'required' => false,
+                ],
+                'status' => [
+                    'location' => 'json',
+                    'type' => 'string',
+                    'required' => false,
+                    'enum' => ['active', 'disabled']
                 ],
                 'tax_number' => [
                     'location' => 'json',
@@ -3255,6 +3267,27 @@ return [
             ],
         ],
 
+        'ActionOrder' => [
+            'httpMethod' => 'POST',
+            'uri' => 'orders/{id}/actions/{action}',
+            'responseModel' => 'GenericModel',
+            'data' => [
+                'root_key' => 'order',
+            ],
+            'parameters' => [
+                'id' => [
+                    'location' => 'uri',
+                    'type' => 'integer',
+                    'required' => true,
+                ],
+                'action' => [
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+        ],
+
         'UpdateOrder' => [
             'httpMethod' => 'PUT',
             'uri' => 'orders/{id}',
@@ -4063,6 +4096,12 @@ return [
                     'type' => ['integer', 'array'],
                     'required' => false,
                 ],
+                'status' => [
+                    'location' => 'query',
+                    'type' => ['string', 'array'],
+                    'enum' => ['archived', 'active', 'disabled'],
+                    'required' => false
+                ],
             ],
         ],
 
@@ -4200,6 +4239,12 @@ return [
                     'location' => 'json',
                     'type' => 'string',
                     'required' => false,
+                ],
+                'status' => [
+                    'location' => 'json',
+                    'type' => 'string',
+                    'enum' => ['archived', 'active', 'disabled'],
+                    'required' => false
                 ],
                 'supplier_ids' => [
                     'location' => 'json',
@@ -6335,11 +6380,6 @@ return [
                     'type' => 'boolean',
                     'required' => false,
                 ],
-                'order' => [
-                    'location' => 'query',
-                    'type' => 'string',
-                    'required' => false,
-                ],
                 'q' => [
                     'location' => 'query',
                     'type' => 'string',
@@ -6791,10 +6831,13 @@ return [
                     'type' => 'string',
                     'required' => true,
                     'enum' => [
-                        'account.update', 'user.create', 'product.create', 'product.update', 'product.destroy', 'variant.create',
-                        'variant.update', 'variant.destroy', 'image.create', 'image.update', 'image.destroy', 'company.create', 'company.update',
-                        'company.destroy', 'contact.create', 'contact.update', 'contact.destroy', 'address.create', 'address.update',
-                        'address.destroy', 'order.create', 'order.update', 'order.destroy', 'invoice.create', 'invoice.update', 'invoice.destroy',
+                        'account.update', 'user.create',
+                        'product.create', 'product.destroy', 'variant.create', 'variant.stock_level_update',
+                        'image.create', 'image.update', 'image.destroy', 'company.create',
+                        'company.update', 'company.destroy', 'contact.create', 'contact.update', 'contact.destroy',
+                        'address.create', 'address.update', 'address.destroy',
+                        'order.create', 'order.finalized', 'order.fulfilled',
+                        'invoice.create', 'invoice.update', 'invoice.destroy',
                         'fulfillment.create', 'fulfillment.update', 'fulfillment.destroy', 'purchase_order.create', 'purchase_order.update',
                         'purchase_order.destroy', 'procurement.create', 'procurement.update procurement.destroy', 'stock_adjustment.create',
                         'stock_adjustment.update', 'stock_adjustment.destroy', 'stock_transfer.create', 'stock_transfer.update', 'stock_transfer.destroy'
@@ -6811,6 +6854,11 @@ return [
                 'root_key' => 'webhook',
             ],
             'parameters' => [
+                'id' => [
+                    'location' => 'uri',
+                    'type' => 'integer',
+                    'required' => true,
+                ],
                 'address' => [
                     'location' => 'json',
                     'type' => 'string',

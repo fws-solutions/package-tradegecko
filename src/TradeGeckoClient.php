@@ -144,6 +144,7 @@ use Psr\Http\Message\ResponseInterface;
  * @method array createOrder(array $args = []) {@command TradeGecko CreateOrder}
  * @method array updateOrder(array $args = []) {@command TradeGecko UpdateOrder}
  * @method array deleteOrder(array $args = []) {@command TradeGecko DeleteOrder}
+ * @method array actionOrder(array $args = []) {@command TradeGecko ActionOrder}
  *
  * ORDER LINE ITEMS RELATED METHODS:
  *
