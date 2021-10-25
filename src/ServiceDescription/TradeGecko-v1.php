@@ -3030,7 +3030,7 @@ return [
                     'location' => 'query',
                     'type' => ['string', 'array'],
                     'required' => false,
-                    'enum' => ['draft', 'active', 'finalized']
+                    'enum' => ['draft', 'active', 'finalized', 'deleted', 'fulfilled', 'void'],
                 ],
                 'billing_address_id' => [
                     'location' => 'query',
